@@ -101,6 +101,16 @@ export class EditRoleComponent {
   updateRole() {
      if (this.roleForm.invalid) {
     this.roleForm.form.markAllAsTouched(); 
+
+    Swal.fire({
+             icon: 'error',                
+             title: 'Invalid Form',              
+             text: 'Please fill out all required fields correctly.',
+             showConfirmButton: true,
+             confirmButtonText: 'OK',
+             confirmButtonColor: '#e74c3c', // red button
+             background: '#fff'
+          });
    
     return; 
   }

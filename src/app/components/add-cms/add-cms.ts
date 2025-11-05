@@ -131,6 +131,7 @@ export class AddCMS {
   if (control && control.value && control.value.length > maxLength) {
     control.setValue(control.value.slice(0, maxLength), { emitEvent: false });
   }
+  control?.setValue(control?.value.trimStart());
 }
 
   cancel(){
@@ -210,6 +211,15 @@ export class AddCMS {
     } else {
       this.isloading=false;
       this.cmsForm.markAllAsTouched();
+      Swal.fire({
+               icon: 'error',                
+               title: 'Invalid Form',              
+               text: 'Please fill out all required fields correctly.',
+               showConfirmButton: true,
+               confirmButtonText: 'OK',
+               confirmButtonColor: '#e74c3c', // red button
+               background: '#fff'
+            });
     }
   }
 

@@ -94,9 +94,18 @@ toggleAllPermissions() {
 
   addRole() {
     if (this.roleForm.invalid) {
-    this.roleForm.form.markAllAsTouched(); // ✅ highlight all invalid controls
+    this.roleForm.form.markAllAsTouched(); 
+    Swal.fire({
+             icon: 'error',                
+             title: 'Invalid Form',              
+             text: 'Please fill out all required fields correctly.',
+             showConfirmButton: true,
+             confirmButtonText: 'OK',
+             confirmButtonColor: '#e74c3c', // red button
+             background: '#fff'
+          });
    
-    return; // ⛔ stop here
+    return; 
   }
     this.isloading=true;
 

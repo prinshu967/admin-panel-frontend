@@ -16,6 +16,7 @@
           type="email"
           id="email"
           formControlName="email"
+          
           placeholder="Enter your email"
           (input)="limitInput('email',100)"
           [class.is-invalid]="(f['email'].touched || submitted) && f['email'].invalid"

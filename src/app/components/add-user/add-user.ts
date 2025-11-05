@@ -121,12 +121,16 @@ export class AddUser implements OnInit {
     if (this.userForm.invalid) {
       this.userForm.markAllAsTouched();
       this.isloading=false;
-       Swal.fire({
-  title: 'Error!',
-  text: 'Invalid Form!',
-  icon: 'error',
-  confirmButtonText: 'OK'
-});
+  Swal.fire({
+           icon: 'error',                
+           title: 'Invalid Form',              
+           text: 'Please fill out all required fields correctly.',
+           showConfirmButton: true,
+           confirmButtonText: 'OK',
+           confirmButtonColor: '#e74c3c', // red button
+           background: '#fff'
+        });
+
 
       return;
     }
@@ -189,8 +193,10 @@ export class AddUser implements OnInit {
 limitInput(controlName: string, maxLength: number) {
   const control = this.userForm.get(controlName);
   if (control && control.value && control.value.length > maxLength) {
+    control.setValue(control.value.trim())
     control.setValue(control.value.slice(0, maxLength), { emitEvent: false });
   }
+  control?.setValue(control?.value.trimStart());
 }
 
 limitNumberLength(event: any, maxLength: number) {
