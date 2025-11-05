@@ -1,0 +1,132 @@
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Ensure full height and remove scrollbars */
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  background-color: #f0f2f5;
+}
+.required{
+  color:red;
+}
+
+/* Container */
+.login-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #f0f2f5;
+}
+
+/* Card */
+.login-card {
+  background-color: #fff;
+  padding: 32px 36px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+  width: 460px;
+  text-align: center;
+}
+
+/* Heading */
+.login-card h2 {
+  margin-bottom: 24px;
+  color: #333;
+  font-weight: 600;
+}
+
+/* Form groups */
+.form-group {
+  margin-bottom: 18px;
+  text-align: left;
+}
+
+/* Labels */
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #555;
+}
+
+/* Inputs */
+.form-group input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  transition: all 0.2s ease-in-out;
+}
+
+.form-group input:focus {
+  border-color: #1e88e5;
+  background-color: #f9fbff;
+  outline: none;
+}
+
+/* Invalid state */
+.form-group input.is-invalid {
+  border-color: #d32f2f;
+  background-color: #fff6f6;
+}
+
+/* Error messages */
+.error small {
+  color: #d32f2f;
+  display: block;
+  margin-top: 4px;
+  font-size: 13px;
+}
+
+/* Button */
+.form-actions button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background-color: #1e88e5;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.form-actions button:hover {
+  background-color: #1565c0;
+}
+
+/* Login error */
+.error-message {
+  margin-top: 12px;
+  color: #d32f2f;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Forgot password link */
+.forgot-password {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 14px;
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.forgot-password:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}

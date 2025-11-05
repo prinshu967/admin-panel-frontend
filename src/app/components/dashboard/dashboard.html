@@ -1,0 +1,30 @@
+<div class="dashboard-container">
+  <h1 class="dashboard-title">📊 Dashboard Overview</h1>
+
+  <!-- Cards Section -->
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon"><i class="fas fa-users"></i></div>
+      <div class="card-title">Total Users</div>
+      <div class="card-value">{{ totalUsers }}</div>
+    </div>
+    <div class="card">
+      <div class="card-icon"><i class="fas fa-user-shield"></i></div>
+      <div class="card-title">Total Roles</div>
+      <div class="card-value">{{ totalRole }}</div>
+    </div>
+  </div>
+
+  <!-- Chart Section -->
+  <div class="chart-section" *ngIf="insightsData && insightsData.length">
+    <h2>Activity Insights</h2>
+    <div class="chart-container">
+      <canvas #insightsChart></canvas>
+    </div>
+  </div>
+
+  <!-- Fallback -->
+  <div class="chart-section" *ngIf="!insightsData || !insightsData.length">
+    <h2>No Insights Data Available</h2>
+  </div>
+</div>

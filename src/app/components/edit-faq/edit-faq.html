@@ -1,0 +1,75 @@
+
+<div *ngIf="isloading" class="spinner-overlay">
+    <div class="spinner"></div>
+  </div>
+  
+
+<form [formGroup]="emailForm" (ngSubmit)="onSubmit()" class="faq-form">
+  <h2>Edit FAQ</h2>
+
+  <!-- Question -->
+  <div class="form-group">
+    <label for="question">Question <span class="required">*</span></label>
+    <input
+      id="question"
+      type="text"
+      class="form-control"
+      formControlName="question"
+      placeholder="Enter FAQ question"
+      (input)="limitInput('question',50)"
+    />
+   <div class="error" *ngIf="question?.touched && question?.invalid">
+      <small *ngIf="question?.errors?.['required']">Question is required.</small>
+      <small *ngIf="question?.errors?.['pattern']">Question cannot start or end with spaces.</small>
+      <small *ngIf="question?.errors?.['maxlength']">Question cannot exceed 50 characters.</small>
+    </div>
+  </div>
+
+  <!-- Display Order -->
+  <div class="form-group">
+    <label for="displayOrder">Display Order <span class="required">*</span></label>
+    <input
+      id="displayOrder"
+      type="number"
+      class="form-control"
+      formControlName="displayOrder"
+      placeholder="Enter display order (e.g., 1, 2, 3)"
+      (input)="limitNumberLength($event,50)"
+    />
+   <div class="error" *ngIf="displayOrder?.touched && displayOrder?.invalid">
+      <small *ngIf="displayOrder?.errors?.['required']">Display Order is required.</small>
+      <small *ngIf="displayOrder?.errors?.['pattern']">Display Order cannot start or end with spaces.</small>
+    </div>
+  </div>
+   <!-- Active Status -->
+  <div class="form-group">
+    <label for="isActive">Status</label>
+    <select id="isActive" formControlName="isActive" class="form-control">
+      <option [ngValue]="true">Active</option>
+      <option [ngValue]="false">Inactive</option>
+    </select>
+  </div>
+
+  <!-- Answer -->
+  <div class="form-group-ck-editor-container">
+    <label for="answer">Answer <span class="required">*</span></label>
+    <ckeditor
+      id="answer"
+      formControlName="answer"
+      [editor]="Editor"
+      [config]="config"
+    ></ckeditor>
+    <div class="error" *ngIf="answer?.touched && answer?.invalid">
+      Answer is required
+    </div>
+  </div>
+
+  
+
+  <!-- Buttons -->
+  <div class="button-group">
+    <button type="submit" class="btn-submit" >Submit</button>
+    <button type="button" class="btn-cancel" (click)="cancel()">Cancel</button>
+  </div>
+
+</form>

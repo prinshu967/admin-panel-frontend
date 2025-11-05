@@ -1,0 +1,186 @@
+<div class="user-container">
+      @if(isUnauthorized){
+
+    <div style="
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 100vh;
+     text-align: center;
+     flex-direction: column;
+     background-color: #f8d7da;
+     color: #721c24;
+     font-family: Arial, sans-serif;
+     font-size: 48px;
+     font-weight: bold;
+     text-shadow: 0 0 10px rgba(255,0,0,0.7);
+     animation: glow 1.5s infinite alternate;">
+  <h1>Unauthorized</h1>
+  <p style="font-size: 24px; font-weight: normal; color: #721c24;">You do not have access</p>
+</div>
+
+  }
+  @else {
+    <div class="header">
+    <h2>CMS</h2>
+     <div style="display: flex; gap: 10px;">
+      <button (click)="exportToExcel()" class="export-btn" >Export to XML</button>
+    <button class="add-btn" [routerLink]="['/CMS/add']">+ Add CMS</button>
+  </div>
+  </div>
+   <div *ngIf="isloading" class="spinner-overlay">
+    <div class="spinner"></div> 
+  </div>
+
+  <div class="table-container"> 
+    <table>
+      <thead>
+        <tr>
+          <th (click)="orderByKey()">Key 
+            @if(toggleKey){<i class="fas fa-long-arrow-down"></i>}
+
+          @else{<i class="fas fa-long-arrow-up"></i>}
+          </th>
+          <th (click)="orderByTitle()">Title
+            @if(toggleTitle){<i class="fas fa-long-arrow-down"></i>}
+
+          @else{<i class="fas fa-long-arrow-up"></i>}
+          </th>
+          <th (click)="orderByMetaKeyword()">Meta Keyword
+            @if(toggleMetaKeyword){<i class="fas fa-long-arrow-down"></i>}
+
+          @else{<i class="fas fa-long-arrow-up"></i>}
+          </th>
+          <th (click)="orderByMetaDescription()">Meta Description
+            @if(toggleMetaDescription){<i class="fas fa-long-arrow-down"></i>}
+
+          @else{<i class="fas fa-long-arrow-up"></i>}
+          </th>
+          <th (click)="orderByMetaTitle()">Meta Title
+            @if(toggleMetaTitle){<i class="fas fa-long-arrow-down"></i>}
+
+          @else{<i class="fas fa-long-arrow-up"></i>}
+          </th>
+          <th>Active</th>
+          
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+
+         <td>
+            
+              <input type="search" [(ngModel)]="searchKey" (keyup.enter)="SearchByKey()" placeholder="search">
+            
+          </td>
+        
+          <td>
+            
+              <input type="search" [(ngModel)]="searchTitle" (keyup.enter)="SearchByTitle()" placeholder="Search">
+            
+          </td>
+
+          <td>
+            
+              <input type="search" [(ngModel)]="searchMetaKeyword" (keyup.enter)="SearchByMetaKeyword()" placeholder="Search">
+            
+          </td>
+        
+          <td>
+            
+              <input type="search" [(ngModel)]="searchMetaDescription" (keyup.enter)="SearchByMetaDescription()" placeholder="search">
+            
+          </td>
+        
+          <td>
+            
+              <input type="search"[(ngModel)]="searchMetaTitle" (keyup.enter)="SearchByMetaTitle()" placeholder="Search" >
+            
+          </td>
+        
+          <td>
+            
+                     <select  
+                     (change)="SearchByIsActive(searchStatus)"
+                     
+                     [(ngModel)]="searchStatus" 
+
+                     
+                     >
+                      <option [ngValue]="null" >All</option>
+                      <option [ngValue]="true">Active</option>
+                      <option  [ngValue]="false">Inactive</option>
+                      </select>
+                 
+
+          </td>
+                <td 
+  (click)="clear()" 
+  style="
+    cursor: pointer; 
+    color: #e74c3c; 
+    font-weight: 600; 
+    padding: 6px 12px; 
+    border-radius: 6px; 
+    
+    transition: 0.3s;
+  "
+  onmouseover="this.style.background='#f8d7da';" 
+  onmouseout="this.style.background='white';"
+>
+  <i class='fa fa-circle-xmark' style="margin-right:6px;"></i>
+  Clear
+</td>
+
+        @for (item of data?.items; track item.id) {
+          <tr>
+            <td>{{ item.key }}</td>
+            <td>{{ item.title}}</td>
+            <td>{{ item.metaKeyword }}</td>
+            <td>{{ item.metaDescription }}</td>
+            <td>{{ item.metaTitle}}</td>
+           <td class="switch-cell">
+             <div 
+             class="switch-display" 
+             [class.active]="item.isActive"
+             (click)="toggleActive(item)">
+             <div class="slider"></div>
+              </div>
+           </td>
+            
+            <td style="text-align: right;">
+              <div class="action-btns">
+                <button class="edit-btn" [routerLink]="['/CMS/edit', item.id]"><i class="fas fa-pen"></i></button>
+                <button class="delete-btn" (click)="deleteCMS(item.id)"><i class="fas fa-trash"></i></button>
+              </div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  <div class="pagination-container" *ngIf="data">
+  <div class="page-info">
+    <span>Total Items: {{ data.totalCount }}</span>
+    <span>Page: {{ data.pageNumber }} / {{ data.totalPages }}</span>
+  </div>
+
+  <div class="page-controls">
+    <button (click)="goToPrevious()" [disabled]="!data.hasPreviousPage">Previous</button>
+    <button (click)="goToNext()" [disabled]="!data.hasNextPage">Next</button>
+
+    <label for="pageSize">Items per page:</label>
+    <select id="pageSize" [(ngModel)]="data.pageSize" (change)="onPageSizeChange(data.pageSize)">
+      <option [value]="5">5</option>
+      <option [value]="10">10</option>
+      <option [value]="15">15</option>
+      <option [value]="20">20</option>
+      
+    </select>
+  </div>
+</div>
+
+  }
+  
+
+</div>

@@ -1,0 +1,172 @@
+<div class="role-container">
+
+   @if(isUnauthorized){
+
+    <div style="
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 100vh;
+     text-align: center;
+     flex-direction: column;
+     background-color: #f8d7da;
+     color: #721c24;
+     font-family: Arial, sans-serif;
+     font-size: 48px;
+     font-weight: bold;
+     text-shadow: 0 0 10px rgba(255,0,0,0.7);
+     animation: glow 1.5s infinite alternate;">
+  <h1>Unauthorized</h1>
+  <p style="font-size: 24px; font-weight: normal; color: #721c24;">You do not have access</p>
+</div>
+
+
+   
+
+  }
+  @else {
+    <div class="header">
+    <h2>Roles</h2>
+     <div style="display: flex; gap: 10px;">
+      <button (click)="exportToExcel()" class="export-btn" >Export to XML</button>
+    <button class="add-btn" routerLink="/Roles/add">+ Add Role</button>
+    </div>
+  </div>
+
+
+   <div *ngIf="isloading" class="spinner-overlay">
+    <div class="spinner"></div>
+  </div>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <!-- <th>ID</th> -->
+          <th (click)="orderByName()">Role Name
+
+            @if(toggleName){<i class="fas fa-long-arrow-down"></i>}
+
+          @else{<i class="fas fa-long-arrow-up"></i>}
+          </th>
+         
+          <th (click)="orderByDescription()">Description
+
+            @if(toggleDescription){<i class="fas fa-long-arrow-down"></i>}
+
+          @else{<i class="fas fa-long-arrow-up"></i>}
+          </th>
+           <th>Active</th>
+          <th>Action</th>
+        </tr>   
+      
+      </thead>
+      <tbody>
+         <tr>
+         <td>
+            
+              <input type="search" [(ngModel)]="searchName" (keyup.enter)="SearchByName()" placeholder="search">
+            
+          </td>
+        
+          <td>
+            
+              <input type="search"[(ngModel)]="searchDescription" (keyup.enter)="SearchByDescription()" placeholder="Search" >
+            
+          </td>
+        
+          <td>
+            
+                     <select  
+                     (change)="SearchByIsActive(searchStatus)"
+                     
+                     [(ngModel)]="searchStatus" 
+
+                     
+                     >
+                      <option [ngValue]="null" >All</option>
+                      <option [ngValue]="true">Active</option>
+                      <option  [ngValue]="false">Inactive</option>
+                      </select>
+                 
+
+          </td>
+                 <td 
+  (click)="clear()" 
+  style="
+    cursor: pointer; 
+    color: #e74c3c; 
+    font-weight: 600; 
+    padding: 6px 12px; 
+    border-radius: 6px; 
+    
+    transition: 0.3s;
+  "
+  onmouseover="this.style.background='#f8d7da';" 
+  onmouseout="this.style.background='white';"
+>
+  <i class='fa fa-circle-xmark' style="margin-right:6px;"></i>
+  Clear
+</td>
+       </tr>
+
+        @for (item of data?.items; track item.id) {
+          <tr>
+            <!-- <td>{{ item.id }}</td> -->
+            <td>{{ item.name}}</td>
+            
+            <td >{{item.description}}</td>
+            <!-- <td>
+              <span class="status" [class.active]="item.isActive" [class.inactive]="!item.isActive">
+                {{ item.isActive ? 'Yes' : 'No' }}
+                
+              </span>
+            </td> -->
+
+           <td class="switch-cell">
+             <div 
+             class="switch-display" 
+             [class.active]="item.isActive"
+             (click)="toggleActive(item)">
+             <div class="slider"></div>
+              </div>
+           </td>
+            <td style="text-align: right;">
+              <div class="action-btns">
+                <button class="edit-btn" [routerLink]="['/Roles/edit', item.id]"><i class="fas fa-pen"></i></button>
+                <button class="delete-btn" (click)="deleteRole(item.id)"><i class="fas fa-trash"></i></button>
+              </div>
+
+            </td>
+            
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  <div class="pagination-container" *ngIf="data">
+  <div class="page-info">
+    <span>Total Items: {{ data.totalCount }}</span>
+    <span>Page: {{ data.pageNumber }} / {{ data.totalPages }}</span>
+  </div>
+
+  <div class="page-controls">
+    <button (click)="goToPrevious()" [disabled]="!data.hasPreviousPage">Previous</button>
+    <button (click)="goToNext()" [disabled]="!data.hasNextPage">Next</button>
+
+    <label for="pageSize">Items per page:</label>
+    <select id="pageSize" [(ngModel)]="data.pageSize" (change)="onPageSizeChange(data.pageSize)">
+      <option [value]="5">5</option>
+      <option [value]="10">10</option>
+      <option [value]="15">15</option>
+      <option [value]="20">20</option>
+    </select>
+  </div>
+</div>
+
+
+
+
+  }
+  </div>
+  

@@ -1,0 +1,120 @@
+<div class="user-container">
+  <div class="header">
+    <h2>FAQ</h2>
+    <div style="display: flex; gap: 10px;">
+      <button (click)="exportToExcel()" class="export-btn" >Export to XML</button>
+    <button class="add-btn" routerLink="/FAQ/add">+ Add FAQ</button>
+    </div>
+  </div>
+   <div *ngIf="isloading" class="spinner-overlay">
+    <div class="spinner"></div>
+  </div>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          
+          <th (click)="orderByQuestion()">Questions
+
+            @if(toggleQuestion){<i class="fas fa-long-arrow-down"></i>}
+          @else{<i class="fas fa-long-arrow-up"></i>}
+          </th>
+          <th (click)="orderByDisplayOrder()">display Order
+            @if(toggleDisplayOrder){<i class="fas fa-long-arrow-down"></i>}
+          @else{<i class="fas fa-long-arrow-up"></i>}
+          </th>
+          
+          <th>Active</th>
+          
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+       
+        
+          <td>
+            
+              <input type="search" [(ngModel)]="searchQuestion" (keyup.enter)="SearchByQuestion()" placeholder="search">
+            
+          </td>
+        
+          <td>
+            
+              <input type="search" [(ngModel)]="searchDisplayOrder" (keyup.enter)="SearchByDisplayOrder()" placeholder="Search">
+            
+          </td>
+        
+          
+        
+          <td>
+            
+                     <select  
+                     (change)="SearchByIsActive(searchStatus)"
+                     
+                     [(ngModel)]="searchStatus" 
+
+                     
+                     >
+                      <option [ngValue]="null" >All</option>
+                      <option [ngValue]="true">Active</option>
+                      <option  [ngValue]="false">Inactive</option>
+                      </select>
+                 
+
+          </td>
+         <td></td>
+        @for (item of data?.items; track item.id) {
+          <tr>
+        
+            <td>{{ item.question }}</td>
+            <td>{{ item.displayOrder }}</td>
+            
+            <!-- <td>
+              <span class="status" [class.active]="item.isActive" [class.inactive]="!item.isActive">
+                {{ item.isActive ? 'Yes' : 'No' }}
+              </span>
+            </td> -->
+
+            <td class="switch-cell">
+             <div 
+             class="switch-display" 
+             [class.active]="item.isActive"
+             (click)="toggleActive(item)">
+             <div class="slider"></div>
+              </div>
+           </td>
+            
+            <td style="text-align: right;">
+              <div class="action-btns">
+                <button class="edit-btn" [routerLink]="['/FAQ/edit', item.id]"><i class="fas fa-pen"></i></button>
+                <button class="delete-btn" (click)="deleteFaq(item.id)"><i class="fas fa-trash"></i></button>
+              </div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  <div class="pagination-container" *ngIf="data">
+  <div class="page-info">
+    <span>Total Items: {{ data.totalCount }}</span>
+    <span>Page: {{ data.pageNumber }} / {{ data.totalPages }}</span>
+  </div>
+
+  <div class="page-controls">
+    <button (click)="goToPrevious()" [disabled]="!data.hasPreviousPage">Previous</button>
+    <button (click)="goToNext()" [disabled]="!data.hasNextPage">Next</button>
+
+    <label for="pageSize">Items per page:</label>
+    <select id="pageSize" [(ngModel)]="data.pageSize" (change)="onPageSizeChange(data.pageSize)">
+      <option [value]="5">5</option>
+      <option [value]="10">10</option>
+      <option [value]="15">15</option>
+      <option [value]="20">20</option>
+      
+    </select>
+  </div>
+</div>
+
+</div>

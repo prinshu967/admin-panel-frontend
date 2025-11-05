@@ -1,0 +1,211 @@
+/* ---------- Modernized CMS Form Styling ---------- */
+
+/* ---------- Form Container ---------- */
+.cms-form {
+
+  width: 85%;
+  max-width: 1100px;
+  margin: 0rem auto;
+  background: linear-gradient(145deg, #ffffff, #f9fafb);
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.8rem 2rem;
+  justify-content: space-between;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.cms-form:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* ---------- Heading ---------- */
+.cms-form h2 {
+  width: 100%;
+  text-align: center;
+  font-size: 2.1rem;
+  margin-bottom: 2rem;
+  color: #0f172a;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  position: relative;
+}
+
+.cms-form h2::after {
+  content: "";
+  width: 60px;
+  height: 3px;
+  background: #007bff;
+  display: block;
+  margin: 0.6rem auto 0;
+  border-radius: 2px;
+}
+
+/* ---------- Form Groups ---------- */
+.form-group {
+  flex: 1 1 45%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Responsive adjustment */
+@media (max-width: 768px) {
+  .form-group {
+    flex: 1 1 100%;
+  }
+}
+
+/* ---------- Labels ---------- */
+.form-group label {
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 0.6rem;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+.form-group-ck-editor-container label {
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 0.6rem;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+
+
+
+.form-group label:hover {
+  color: #007bff;
+}
+
+.required {
+  color: #e63946;
+}
+
+/* ---------- Inputs & Selects ---------- */
+.form-control {
+  padding: 0.9rem 1.1rem;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+  background-color: #f8fafc;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+  background-color: #fff;
+}
+
+/* ---------- CKEditor Container ---------- */
+.form-group-ck-editor-container {
+  width: 100% !important;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.3s ease;
+}
+
+/* ---------- Error Messages ---------- */
+.error,
+.ck-editor-error {
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  color: #d9534f;
+  font-style: italic;
+}
+
+/* ---------- Buttons ---------- */
+.button-group {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.btn-submit,
+.btn-cancel {
+  padding: 0.9rem 2.4rem;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.4px;
+}
+
+.btn-submit {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: #fff;
+}
+
+.btn-submit:hover {
+  background: linear-gradient(135deg, #0056b3, #004494);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 123, 255, 0.35);
+}
+
+.btn-cancel {
+  background: linear-gradient(135deg, #6c757d, #495057);
+  color: #fff;
+}
+
+.btn-cancel:hover {
+  background: linear-gradient(135deg, #495057, #343a40);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(108, 117, 125, 0.3);
+}
+
+/* ---------- Responsive Tweaks ---------- */
+@media (max-width: 768px) {
+  .cms-form {
+    padding: 1.5rem;
+    gap: 1.2rem;
+  }
+
+  .button-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-submit,
+  .btn-cancel {
+    width: 100%;
+  }
+
+  .form-group .ck.ck-content {
+    min-height: 220px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cms-form {
+    padding: 1rem;
+  }
+
+  .cms-form h2 {
+    font-size: 1.6rem;
+  }
+
+  .form-control {
+    font-size: 0.95rem;
+  }
+
+  .form-group .ck.ck-content {
+    font-size: 0.95rem;
+  }
+}
+
+

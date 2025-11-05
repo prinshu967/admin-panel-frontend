@@ -1,0 +1,163 @@
+<div class="user-container">
+  
+    @if(isUnauthorized){
+
+    <div style="
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 100vh;
+     text-align: center;
+     flex-direction: column;
+     background-color: #f8d7da;
+     color: #721c24;
+     font-family: Arial, sans-serif;
+     font-size: 48px;
+     font-weight: bold;
+     text-shadow: 0 0 10px rgba(255,0,0,0.7);
+     animation: glow 1.5s infinite alternate;">
+  <h1>Unauthorized</h1>
+  <p style="font-size: 24px; font-weight: normal; color: #721c24;">You do not have access</p>
+
+     
+</div>
+
+
+   
+
+  }
+
+  @else {
+    <div class="header">
+    <h2>Audit Logs</h2>
+     <button (click)="exportToExcel()" class="export-btn" >Export to XML</button>
+    
+  </div>
+
+     <div *ngIf="isloading" class="spinner-overlay">
+    <div class="spinner"></div>
+  </div>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          
+          
+          <th (click)="orderByName()">User Name 
+            @if(toggleUsername){<i class="fas fa-long-arrow-down"></i>}
+
+          @else{<i class="fas fa-long-arrow-up"></i>}
+          </th>
+          <th (click)="orderByType()">Type
+            @if(toggleType){<i class="fas fa-long-arrow-down"></i>}
+
+          @else{<i class="fas fa-long-arrow-up"></i>}
+          </th>
+          <th (click)="orderByActivity()">Activity
+
+            @if(toggleActivity){<i class="fas fa-long-arrow-down"></i>}
+
+          @else{<i class="fas fa-long-arrow-up"></i>}
+          </th>
+          
+          <th (click)="orderByDate()">Time Stamp
+
+            @if(toggleDate){<i class="fas fa-long-arrow-down"></i>}
+
+          @else{<i class="fas fa-long-arrow-up"></i>}
+          
+          </th>
+          <th>Action</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        
+          <td>
+            
+              <input type="search" [(ngModel)]="searchUsername" (keyup.enter)="SearchByName()" placeholder="search">
+            
+          </td>
+          <td>
+            
+              <input type="search" [(ngModel)]="searchType" (keyup.enter)="SearchByType()" placeholder="search">
+            
+          </td>
+        
+        
+          <td>
+            
+              <input type="search" [(ngModel)]="searchActivity" (keyup.enter)="SearchByActivity()" placeholder="Search">
+            
+          </td>
+        
+          <td>
+            
+              <input type="date" [(ngModel)]="searchDate" (change)="SearchByDate()" placeholder="search">
+            
+          </td>
+          <td 
+  (click)="clear()" 
+  style="
+    cursor: pointer; 
+    color: #e74c3c; 
+    font-weight: 600; 
+    padding: 6px 12px; 
+    border-radius: 6px; 
+    
+    transition: 0.3s;
+  "
+  onmouseover="this.style.background='#f8d7da';" 
+  onmouseout="this.style.background='white';"
+>
+  <i class='fa fa-circle-xmark' style="margin-right:6px;"></i>
+  Clear
+</td>
+          
+        
+          
+          
+        
+        @for (item of data?.items; track item.id) {
+          
+       
+        <tr>
+            <td>{{ item.userName }}</td>
+            <td>{{ item.type }}</td>
+            <td>{{ item.activity }}</td>
+            
+            <td>{{ item.createdOn | date: 'MMM d, y, h:mm a' }}</td>
+            <td></td>
+           
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  <div class="pagination-container" *ngIf="data">
+  <div class="page-info">
+    <span>Total Items: {{ data.totalCount }}</span>
+    <span>Page: {{ data.pageNumber }} / {{ data.totalPages }}</span>
+  </div>
+
+  <div class="page-controls">
+    <button (click)="goToPrevious()" [disabled]="!data.hasPreviousPage">Previous</button>
+    <button (click)="goToNext()" [disabled]="!data.hasNextPage">Next</button>
+
+    <label for="pageSize">Items per page:</label>
+    <select id="pageSize" [(ngModel)]="data.pageSize" (change)="onPageSizeChange(data.pageSize)">
+      <option [value]="5">5</option>
+      <option [value]="10">10</option>
+      <option [value]="15">15</option>
+      <option [value]="20">20</option>
+      
+    </select>
+  </div>
+</div>
+
+
+  }
+  
+</div>

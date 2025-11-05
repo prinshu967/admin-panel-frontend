@@ -1,0 +1,115 @@
+
+  <div *ngIf="isloading" class="spinner-overlay">
+    <div class="spinner"></div>
+  </div>
+
+
+<form [formGroup]="emailForm" (ngSubmit)="onSubmit()" class="cms-form">
+  <h2>Add New Email Template</h2>
+
+
+  <!-- Key -->
+  <div class="form-group">
+    <label for="key">Key <span class="required">*</span></label>
+    <input id="key" formControlName="key" type="text" class="form-control" placeholder="Enter The Unique Key" (input)="limitInput('key',50)">
+    <div class="error" *ngIf="key?.touched && key?.invalid">
+      <span *ngIf="emailForm.get('key')?.hasError('required')">Key is required</span>
+      <span *ngIf="emailForm.get('key')?.hasError('maxlength')">Maximum 50 characters.</span>
+      <span *ngIf="emailForm.get('key')?.hasError('pattern')">can not be empty or only spaces</span>
+    </div>
+  </div>
+
+  <!-- Title -->
+  <div class="form-group">
+    <label for="title">Title <span class="required">*</span></label>
+    <input id="title" formControlName="title" type="text" class="form-control" placeholder="Enter The Title" (input)="limitInput('title',50)" >
+    <div class="error" *ngIf="title?.touched && title?.invalid">
+      <span *ngIf="emailForm.get('title')?.hasError('required')">Title is required</span>
+      <span *ngIf="emailForm.get('title')?.hasError('maxlength')">Maximum 50 characters.</span>
+      <span *ngIf="emailForm.get('title')?.hasError('pattern')">can not be empty or only spaces</span>
+    </div>
+  </div>
+
+  <!-- Subject -->
+  <div class="form-group">
+    <label for="subject">Subject <span class="required">*</span></label>
+    <input id="subject" formControlName="subject" type="text" class="form-control" placeholder="Enter The Subject" (input)="limitInput('subject',100)">
+     <div class="error" *ngIf="subject?.touched && title?.invalid">
+      <span *ngIf="emailForm.get('subject')?.hasError('required')">Subject is required</span>
+      <span *ngIf="emailForm.get('subject')?.hasError('maxlength')">Maximum 100 characters.</span>
+      <span *ngIf="emailForm.get('subject')?.hasError('pattern')">can not be empty or only spaces</span>
+    </div>
+
+  </div>
+
+  <!-- From Name -->
+  <div class="form-group">
+    <label for="fromName">From Name <span class="required">*</span></label>
+    <input id="fromName" formControlName="fromName" type="text" class="form-control" placeholder=" Enter The From Name" (input)="limitInput('fromName',50)">
+    <div class="error" *ngIf="fromName?.touched && fromEmail?.invalid">
+      <span *ngIf="emailForm.get('fromName')?.hasError('required')">From name is required.</span>
+      <span *ngIf="emailForm.get('fromName')?.hasError('minlength')">Minimum 2 characters.</span>
+      <span *ngIf="emailForm.get('fromName')?.hasError('maxlength')">Maximum 50 characters.</span>
+      <span *ngIf="emailForm.get('fromName')?.hasError('pattern')">can not be empty or only spaces</span>
+    </div>
+  </div>
+
+  <!-- From Email -->
+  <div class="form-group">
+    <label for="fromEmail">From Email <span class="required">*</span></label>
+    <input id="fromEmail" formControlName="fromEmail" type="email" class="form-control" placeholder="Enter The From Email" (input)="limitInput('fromEmail',100)">
+    <div class="error" *ngIf="fromEmail?.touched && fromEmail?.invalid">
+      <span *ngIf="emailForm.get('fromEmail')?.hasError('required')">Email is required.</span>
+      <span *ngIf="emailForm.get('fromEmail')?.hasError('maxlength')">Maximum 100 characters.</span>
+      <span *ngIf="emailForm.get('fromEmail')?.hasError('pattern')">Invalid email format.</span>
+    </div>
+  </div>
+
+  <!-- Active Status -->
+  <div class="form-group">
+    <label for="isActive">Status </label>
+    <select id="isActive" formControlName="isActive" class="form-control">
+      <option [ngValue]="true">Active</option>
+      <option [ngValue]="false">Inactive</option>
+    </select>
+  </div>
+
+ <div class="form-group checkbox-group">
+  <label class="checkbox-label" for="isManualMail">
+    <input id="isManualMail" formControlName="isManualMail" type="checkbox" class="checkbox-input">
+    Is Manual Mail
+  </label>
+  
+</div>
+
+<div class="form-group checkbox-group">
+  <label class="checkbox-label" for="isContactUsMail">
+    <input id="isContactUsMail" formControlName="isContactUsMail" type="checkbox" class="checkbox-input">
+    Is Contact Us Mail
+  </label>
+  
+</div>
+
+
+  <!-- Body -->
+  <div class="form-group-ck-editor-container">
+    <label for="body">Body <span class="required">*</span></label>
+    <ckeditor formControlName="body" 
+    [editor]="Editor"
+      [config]="config"
+    
+    
+    ></ckeditor>
+    <div class="ck-editor-error" *ngIf="body?.touched && body?.invalid">
+      Body content is required
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <div class="button-group">
+    <button type="submit" class="btn-submit" >Submit</button>
+    <button type="button" class="btn-cancel" (click)="cancel()">Cancel</button>
+  </div>
+
+</form>
+

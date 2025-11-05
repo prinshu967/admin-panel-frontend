@@ -1,0 +1,79 @@
+
+
+
+ <form [formGroup]="cmsForm" (ngSubmit)="onSubmit()" class="cms-form">
+  <h2>Add New CMS</h2>
+
+  <div class="form-group">
+    <label for="key">Key <span class="required">*</span></label>
+    <input id="key" formControlName="key" type="text" class="form-control" placeholder="Enter unique CMS key"  (input)="limitInput('key',50)">
+    <div class="error" *ngIf="key.touched && key.invalid">
+      <span *ngIf="cmsForm.get('key')?.hasError('required')">Key is required</span>
+      <span *ngIf="cmsForm.get('key')?.hasError('maxlength')">Maximum 50 characters.</span>
+      <span *ngIf="cmsForm.get('key')?.hasError('pattern')">Cannot be empty or only spaces</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="title">Title <span class="required">*</span></label>
+    <input id="title" formControlName="title" type="text" class="form-control" placeholder="Enter page title"  (input)="limitInput('title',50)"   >
+    <div class="error" *ngIf="title.touched && title.invalid">
+      <span *ngIf="cmsForm.get('title')?.hasError('required')">Title is required</span>
+      <span *ngIf="cmsForm.get('title')?.hasError('maxlength')">Maximum 50 characters.</span>
+      <span *ngIf="cmsForm.get('title')?.hasError('pattern')">Cannot be empty or only spaces</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="metaKeyword">Meta Keyword <span class="required">*</span></label>
+    <input id="metaKeyword" formControlName="metaKeyword" type="text" class="form-control" placeholder="Enter meta keywords (comma separated)"  (input)="limitInput('metaKeyword',50)"  >
+    <div class="error" *ngIf="metaKeyword.touched && metaKeyword.invalid">
+      <span *ngIf="cmsForm.get('metaKeyword')?.hasError('required')">Meta Keyword is required</span>
+      <span *ngIf="cmsForm.get('metaKeyword')?.hasError('maxlength')">Maximum 50 characters.</span>
+      <span *ngIf="cmsForm.get('metaKeyword')?.hasError('pattern')">Cannot be empty or only spaces</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="metaTitle">Meta Title <span class="required">*</span></label>
+    <input id="metaTitle" formControlName="metaTitle" type="text" class="form-control" placeholder="Enter meta title" (input)="limitInput('metaTitle',50)" >
+    <div class="error" *ngIf="metaTitle.touched && metaTitle.invalid">
+      <span *ngIf="cmsForm.get('metaTitle')?.hasError('required')">Meta title is required</span>
+      <span *ngIf="cmsForm.get('metaTitle')?.hasError('maxlength')">Maximum 50 characters.</span>
+      <span *ngIf="cmsForm.get('metaTitle')?.hasError('pattern')">Cannot be empty or only spaces</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="metaDescription">Meta Description <span class="required">*</span></label>
+    <input id="metaDescription" formControlName="metaDescription" type="text" class="form-control" placeholder="Enter short description for search engines"  (input)="limitInput('metaDescription',100)">
+    <div class="error" *ngIf="metaDescription.touched && metaDescription.invalid">
+      <span *ngIf="cmsForm.get('metaDescription')?.hasError('required')">Meta description is required</span>
+      <span *ngIf="cmsForm.get('metaDescription')?.hasError('maxlength')">Maximum 100 characters.</span>
+      <span *ngIf="cmsForm.get('metaDescription')?.hasError('pattern')">Cannot be empty or only spaces</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="isActive">Status</label>
+    <select id="isActive" formControlName="isActive" class="form-control">
+      <option [ngValue]="true">Active</option>
+      <option [ngValue]="false">Inactive</option>
+    </select>
+  </div>
+
+  <!-- CKEditor full-width row -->
+  <div class="form-group-ck-editor-container">
+    <label for="content">Content <span class="required">*</span></label>
+    <ckeditor formControlName="content" [editor]="Editor" [config]="config"></ckeditor>
+    <div class="ck-editor-error" *ngIf="content.touched && content.invalid">
+      Content is required
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <div class="button-group">
+    <button type="submit" class="btn-submit">Submit</button>
+    <button type="button" class="btn-cancel" (click)="cancel()">Cancel</button>
+  </div>
+</form>

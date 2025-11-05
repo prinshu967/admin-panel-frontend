@@ -1,0 +1,157 @@
+
+<div *ngIf="isloading" class="spinner-overlay">
+    <div class="spinner"></div>
+  </div>
+<form (ngSubmit)="addRole()" #roleForm="ngForm" class="cms-form">
+  <h2>Add New Role</h2>
+
+  <!-- Role Name -->
+  <div class="form-group">
+    <label for="name">Role Name <span class="required">*</span></label>
+    <input
+      id="name"
+      type="text"
+      name="name"
+      [(ngModel)]="newRole.name"
+      #name="ngModel"
+     required
+      minlength="3"
+      maxlength="50"
+     
+      pattern="^[A-Za-z ]+$"
+      class="form-control"
+      placeholder="Enter role name"
+    />
+    <div class="error" *ngIf="name.touched && (name.invalid|| newRole.name.trim().length<3)">
+      @if(name.errors?.['required']){
+         <span >Role name is required.</span>
+
+      }
+      @else if(name.errors?.['minlength']) {
+        <span>Minimum 3 characters required.</span>
+
+      }
+      @else if(name.errors?.['maxlength']){
+        <span >Maximum 50 characters allowed.</span>
+
+      }
+      @else if(name.errors?.['pattern']){
+        <span >Role name Contains Alphabets Only.</span>
+      }
+      @else if(newRole.name.trim() === ''){
+         Role name is required.
+
+      }
+      @else{
+        Minimum 3 characters required.
+
+
+      }
+     
+
+      
+      
+      
+     
+    </div>
+  </div>
+
+  <!-- Description -->
+  <div class="form-group">
+    <label for="description">Description <span class="required">*</span></label>
+    <input
+      id="description"
+      type="text"
+      name="description"
+      [(ngModel)]="newRole.description"
+      #description="ngModel"
+     required
+      minlength="5"
+      maxlength="100"
+      
+
+      class="form-control"
+      placeholder="Enter Short role description"
+    />
+    <div class="error" *ngIf="description.touched && (description.invalid||newRole.description.trim().length<5)">
+      
+       @if(description.errors?.['required']){
+         <span >Description is required.</span>
+
+      }
+      @else if(description.errors?.['minlength']) {
+        <span>Minimum 5 characters required.</span>
+
+      }
+      @else if(description.errors?.['maxlength']){
+        <span >Maximum 100 characters allowed.</span>
+
+      }
+      @else if(description.errors?.['pattern']){
+        <span >Description cannot be empty or only spaces.</span>
+      }
+      @else if(newRole.description.trim() === ''){
+         Role Discription is required.
+
+      }
+      @else{
+        Minimum 5 characters required.
+
+
+      }
+     
+    </div>
+  </div>
+
+  <!-- Active Status -->
+  <div class="form-group">
+    <label for="isActive">Status</label>
+    <select id="isActive" name="isActive" [(ngModel)]="newRole.isActive" class="form-control">
+      <option [ngValue]="true">Active</option>
+      <option [ngValue]="false">Inactive</option>
+    </select>
+  </div>
+
+  <!-- Permissions Section -->
+  <div class="permissions-section">
+    <h3>* Permissions</h3>
+    <div class="permissions-controls">
+      <button type="button" class="toggle-btn" (click)="toggleAllGroups()">
+        {{ isExpanded ? 'Collapse All' : 'Expand All' }}
+      </button>
+      <button type="button" class="toggle-btn" (click)="toggleAllPermissions()">
+        {{ isCheckedAll ? 'Uncheck All' : 'Check All' }}
+      </button>
+    </div>
+
+    <div class="permissions-list">
+      <div *ngFor="let group of objectKeys(allPermissionsGrouped)" class="permission-group">
+        <div class="permission-group-header" (click)="toggleGroup(group)">
+          <i
+            class="fa-solid"
+            [ngClass]="expandedGroups[group] ? 'fa-chevron-down' : 'fa-chevron-right'"
+          ></i>
+          <span>{{ group }}</span>
+        </div>
+
+        <div *ngIf="expandedGroups[group]" class="permission-items">
+          <label *ngFor="let permission of allPermissionsGrouped[group]" class="permission-item">
+            <input
+              type="checkbox"
+              [value]="permission"
+              (change)="togglePermission(permission, $event)"
+              [checked]="newRole.permissions.includes(permission)"
+            />
+            {{ permission }}
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <div class="button-group">
+    <button type="submit" class="btn-submit" >Add Role</button>
+    <button type="button" class="btn-cancel" routerLink="/Roles">Cancel</button>
+  </div>
+</form>

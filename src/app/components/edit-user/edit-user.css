@@ -1,0 +1,326 @@
+.user-form {
+  width: 90%;
+  max-width: 1000px;
+  margin: 0rem auto;
+  background: linear-gradient(145deg, #ffffff, #f9fafb);
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: space-between;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.user-form:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* ---------- HEADING ---------- */
+.user-form h2 {
+  width: 100%;
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #0f172a;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  position: relative;
+}
+
+.user-form h2::after {
+  content: "";
+  width: 60px;
+  height: 3px;
+  background: #007bff;
+  display: block;
+  margin: 0.6rem auto 0;
+  border-radius: 2px;
+}
+
+/* ---------- FORM GROUPS ---------- */
+.form-group {
+  flex: 1 1 calc(50% - 1rem); /* Two fields per row */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .form-group {
+    flex: 1 1 100%; /* One field per row */
+  }
+}
+
+/* ---------- LABELS ---------- */
+.form-group label {
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 0.6rem;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.form-group label:hover {
+  color: #007bff;
+}
+
+.required {
+  color: #e63946;
+}
+
+/* ---------- INPUTS & SELECTS ---------- */
+.form-control {
+  padding: 0.9rem 1.1rem;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+  background-color: #f8fafc;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+  background-color: #fff;
+}
+
+/* ---------- NG-SELECT (Angular Select) ---------- */
+.ng-select {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  background-color: #f8fafc;
+  transition: all 0.3s ease;
+  
+  box-sizing: border-box;
+  padding: 0%;
+  margin: 0%;
+  
+}
+
+.ng-select:hover{
+  border: 1px solid #007bff;
+}
+.ng-select .ng-select-container {
+  
+  min-height: 46px;
+  border: none;
+  background-color: transparent;
+  border-radius: 10px;
+  padding: 0.4rem 0.8rem;
+  display: flex;
+  align-items: center;
+}
+.ng-select .ng-input > input {
+  margin-top: 6px;
+  margin-left: 6px;
+  box-sizing: border-box;
+  line-height: 1;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: inherit;
+  color: inherit;
+}
+.ng-select.ng-select-focused .ng-select-container {
+  border-color: #007bff !important;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+  background-color: #fff;
+  border: 2px;
+}
+
+.ng-select .ng-dropdown-panel {
+  margin-top: 3px;
+  
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  background-color: white
+ 
+}
+
+.ng-select .ng-option {
+  padding: 0.6rem 0.8rem;
+  font-size: 0.95rem;
+  transition: background 0.2s;
+}
+
+.ng-select .ng-option:hover {
+  background-color: #e3f2fd;
+}
+
+.ng-select .ng-option-selected {
+   background-color: #007bff !important;
+}
+
+/* ---------- PASSWORD FIELD (SHOW / HIDE) ---------- */
+.password-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+.password-input {
+  flex: 1;
+  border-right: none;
+  padding: 0.9rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px 0 0 10px; /* Left corners rounded only */
+  outline: none;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.password-toggle {
+  border: 1px solid #cbd5e1;
+  border-left: none; /* remove middle line */
+  background-color: #f8fafc;
+  border-radius: 0 10px 10px 0; /* Right corners rounded only */
+  padding: 1.09rem 1.09rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  outline: none;
+  justify-content: center;
+}
+
+.password-toggle:hover {
+  color: #007bff;
+  background-color: #f1f5f9;
+}
+
+/* Optional: Focus effect */
+.password-input:focus
+ {
+ 
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+
+/* ---------- ERROR MESSAGES ---------- */
+.error {
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  color: #d9534f;
+  font-style: italic;
+}
+
+/* ---------- IMAGE PREVIEW ---------- */
+.image-preview {
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.image-preview img {
+  width: 100px;
+  height: 100px;
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+  object-fit: cover;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.image-preview img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+
+/* ---------- BUTTONS ---------- */
+.button-group {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.btn-submit,
+.btn-cancel {
+  padding: 0.9rem 2.4rem;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.4px;
+}
+
+.btn-submit {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: #fff;
+}
+
+.btn-submit:hover {
+  background: linear-gradient(135deg, #0056b3, #004494);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 123, 255, 0.35);
+}
+
+.btn-cancel {
+  background: linear-gradient(135deg, #6c757d, #495057);
+  color: #fff;
+}
+
+.btn-cancel:hover {
+  background: linear-gradient(135deg, #495057, #343a40);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(108, 117, 125, 0.3);
+}
+
+/* ---------- RESPONSIVE TWEAKS ---------- */
+@media (max-width: 768px) {
+  .user-form {
+    padding: 1.5rem;
+    gap: 1.2rem;
+  }
+
+  .button-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-submit,
+  .btn-cancel {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .user-form {
+    padding: 1rem;
+  }
+
+  .user-form h2 {
+    font-size: 1.6rem;
+  }
+
+  .form-control {
+    font-size: 0.95rem;
+  }
+
+  .image-preview img {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+
+/*Image Preview */
+

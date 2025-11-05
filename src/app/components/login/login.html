@@ -1,0 +1,70 @@
+
+<div *ngIf="isloading" class="spinner-overlay">
+    <div class="spinner"></div>
+  </div>
+
+<div class="login-container">
+  <div class="login-card">
+    <h2>Login</h2>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+      <!-- Email Field -->
+      <div class="form-group">
+        <label for="email">Email <span class="required">*</span></label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          placeholder="Enter your email"
+          (input)="limitInput('email',100)"
+          [class.is-invalid]="(f['email'].touched || submitted) && f['email'].invalid"
+        />
+        <div class="error" *ngIf="(f['email'].touched || submitted) && f['email'].invalid">
+          <small *ngIf="f['email'].errors?.['required']">Email is required</small>
+          <small *ngIf="f['email'].errors?.['email']">Invalid email format</small>
+          <small *ngIf="f['email'].errors?.['pattern']">Please enter a valid email address</small>
+        </div>
+      </div>
+
+      <!-- Password Field -->
+      <div class="form-group">
+        <label for="password">Password <span class="required">*</span></label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          placeholder="Enter your password"
+          (click)="limitInput('password',20)"
+          [class.is-invalid]="(f['password'].touched || submitted) && f['password'].invalid"
+           (input)="limitInput('password',20)"
+        />
+        <div class="error" *ngIf="(f['password'].touched || submitted) && f['password'].invalid">
+          <small *ngIf="f['password'].errors?.['required']">Password is required</small>
+          <small *ngIf="f['password'].errors?.['minlength']">Minimum 8 characters</small>
+          <small *ngIf="f['password'].errors?.['maxlength']">Maximum 20 characters</small>
+          <small *ngIf="f['password'].errors?.['pattern']">
+           Password must contain at least 1 uppercase, 1 lowercase, 1 number, 1 special character, and cannot be only spaces
+          </small>
+        </div>
+      </div>
+
+      <div  style="display: flex; align-items: center ; margin-bottom: 10px;">
+  <input type="checkbox" id="remember">
+  <label for="remember" style="margin-left: 5px;">Remember me</label>
+</div>
+
+      <!-- Submit Button -->
+      <div class="form-actions">
+        <button type="submit">Login</button>
+      </div>
+
+      <!-- General Error Message -->
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+    </form>
+
+    <a class="forgot-password" [routerLink]="['/Login/forgotpassword']">Forgot Password?</a>
+  </div>
+</div>

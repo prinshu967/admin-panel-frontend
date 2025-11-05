@@ -1,0 +1,132 @@
+/* Container */
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px 20px;
+  background: #f5f7fa;
+  min-height: 100vh;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Title */
+.dashboard-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+/* Cards Layout */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 25px;
+  width: 100%;
+  max-width: 1000px;
+  margin-bottom: 50px;
+}
+
+/* Individual Card */
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 25px 20px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* Card icon */
+.card-icon {
+  font-size: 2rem;
+  color: #2575fc;
+  margin-bottom: 10px;
+}
+
+/* Text inside cards */
+.card-title {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.card-value {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #222;
+}
+
+/* Chart Section */
+.chart-section {
+  width: 100%;
+  max-width: 1000px;
+  background: white;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.chart-section h2 {
+  text-align: center;
+  color: #333;
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.chart-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+canvas {
+  width: 100% !important;
+  height: 400px !important;
+}
+
+/* Table (optional if you add insights table later) */
+table {
+  width: 100%;
+  margin-top: 30px;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+thead {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: white;
+}
+
+th, td {
+  padding: 12px 18px;
+  text-align: left;
+}
+
+tbody tr:hover {
+  background-color: #f9f9ff;
+  transition: 0.3s;
+}
+
+@media (max-width: 768px) {
+  .dashboard-title {
+    font-size: 1.6rem;
+  }
+  .card-value {
+    font-size: 1.5rem;
+  }
+  canvas {
+    height: 300px !important;
+  }
+}

@@ -1,0 +1,345 @@
+/* === Base Container === */
+.user-container {
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  font-family: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #2d3748;
+  width: 97%;
+  margin-left: 1.1%;
+  transition: all 0.3s ease;
+}
+
+/* === Header === */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.header h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+/* === Buttons === */
+.add-btn,
+.export-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Add User (Primary) */
+.add-btn {
+  background: linear-gradient(135deg, #1e88e5, #1565c0);
+  color: #fff;
+}
+
+.add-btn:hover {
+  background: linear-gradient(135deg, #2196f3, #1976d2);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(30, 136, 229, 0.3);
+}
+
+/* Export (Secondary) */
+.export-btn {
+  background: linear-gradient(135deg, #43a047, #2e7d32);
+  color: #fff;
+}
+
+.export-btn:hover {
+  background: linear-gradient(135deg, #4caf50, #388e3c);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(67, 160, 71, 0.3);
+}
+
+/* === Table === */
+.table-container {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  background-color: #fff;
+}
+
+thead {
+  background: linear-gradient(90deg, #1e88e5, #42a5f5);
+  color: #fff;
+}
+
+th,
+td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  text-align: left;
+}
+
+th {
+  font-weight: 600;
+  position: relative;
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+}
+
+th:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+tbody tr:hover {
+  background-color: #f8fafc;
+  transition: background-color 0.2s ease;
+}
+
+/* === Search & Filters === */
+table input[type="search"],
+
+table select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: #fff;
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+}
+table input[type="date"] {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: #fff;
+  color: #000;
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+  
+}
+
+/* Optional: focus style for better UX */
+table input[type="date"]:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 3px rgba(59, 130, 246, 0.4);
+}
+
+table input[type="search"]:focus,
+table select:focus {
+  border-color: #1e88e5;
+  box-shadow: 0 0 6px rgba(30, 136, 229, 0.3);
+  outline: none;
+}
+
+/* === Action Buttons in Table === */
+.action-btns {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.edit-btn,
+.delete-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.edit-btn {
+  background-color: #42a5f5;
+}
+
+.edit-btn:hover {
+  background-color: #1e88e5;
+  transform: scale(1.1);
+}
+
+.delete-btn {
+  background-color: #ef5350;
+}
+
+.delete-btn:hover {
+  background-color: #d32f2f;
+  transform: scale(1.1);
+}
+
+/* === Toggle Switch === */
+.switch-cell {
+  text-align: center;
+}
+
+.switch-display {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+  border-radius: 26px;
+  background-color: #ccc;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.switch-display .slider {
+  position: absolute;
+  height: 22px;
+  width: 22px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.switch-display.active {
+  background-color: #6d77e8;
+}
+
+.switch-display.active .slider {
+  transform: translateX(24px);
+}
+
+/* === Pagination === */
+.pagination-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 28px;
+  padding: 14px 20px;
+  background-color: #f9fafb;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.page-info span {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  font-size: 14px;
+  color: #0f0101;
+}
+
+.page-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.page-controls button {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  background-color: #1e88e5;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.25s ease;
+}
+
+.page-controls button:hover:not(:disabled) {
+  background-color: #1565c0;
+  transform: translateY(-2px);
+}
+
+.page-controls button:disabled {
+  background-color: #e0e0e0;
+  color: #777;
+  cursor: not-allowed;
+}
+
+.page-controls select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  transition: all 0.25s;
+}
+
+.page-controls select:hover {
+  border-color: #1e88e5;
+}
+
+.page-controls select:focus {
+  border-color: #1e88e5;
+  box-shadow: 0 0 5px rgba(30, 136, 229, 0.3);
+}
+
+/* === Unauthorized Page === */
+@keyframes glow {
+  from { text-shadow: 0 0 10px rgba(255, 0, 0, 0.5); }
+  to { text-shadow: 0 0 20px rgba(255, 0, 0, 0.9); }
+}
+
+/* === Responsive === */
+@media screen and (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .add-btn,
+  .export-btn {
+    width: 100%;
+  }
+
+  th,
+  td {
+    padding: 10px 12px;
+  }
+
+  .pagination-container {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .header h2 {
+    font-size: 22px;
+  }
+
+  table {
+    font-size: 13px;
+  }
+
+  .page-controls button,
+  .page-controls select {
+    font-size: 12px;
+    padding: 5px 8px;
+  }
+}

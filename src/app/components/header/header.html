@@ -1,0 +1,93 @@
+
+<div *ngIf="isloading" class="spinner-overlay">
+    <div class="spinner"></div>
+  </div> 
+
+<nav class="navbar">
+  <div class="navbar-logo">
+    <h2>Admin Pannel</h2>
+  </div>
+
+  @if (isLoggedIn) {
+    <ul class="navbar-links">
+      <!-- <li><a routerLink="/Login" routerLinkActive="active">Login</a></li>
+      <li><a routerLink="/Profile" routerLinkActive="active">Profile</a></li> -->
+
+      <!-- Profile Icon & Dropdown -->
+      <div class="profile-container" style="position: relative; display: inline-block;">
+        <img
+          (click)="toggleProfileDropdown($event)"
+          class="profile-icon"
+          src="https://cdn-icons-png.flaticon.com/512/847/847969.png"
+          alt="Profile Icon"
+          style="
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            object-fit: cover;
+          
+          "
+        />
+
+        @if (toShowProfileDropdown) {
+          <div class="profile-dropdown" 
+               style="position: absolute; right: -20px; top: 45px; background: #1f2937; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); z-index: 1100;">
+            <ul style="list-style: none; padding: 8px 0; margin: 0;">
+              <li>
+                <a (click)="goToProfile()" 
+                   style="display: block; padding: 10px 20px; color: #fff; text-decoration: none; cursor: pointer;"
+                   onmouseover="this.style.background='#00bcd4';"
+                   onmouseout="this.style.background='transparent';">
+                   Profile
+                </a>
+              </li>
+              <li>
+                <a (click)="Logout()" 
+                   style="display: block; padding: 10px 20px; color: #fff; text-decoration: none; cursor: pointer;"
+                   onmouseover="this.style.background='#dc3545';"
+                   onmouseout="this.style.background='transparent';">
+                   Logout
+                </a>
+              </li>
+            </ul>
+          </div>
+        }
+      </div>
+    </ul>
+  }
+</nav>
+
+<div class="layout">
+  @if (showLayout) {
+    <aside class="sidebar" [style.width]="toMenu ? '240px' : '25px'">
+  @if (toMenu) {
+  <div class="profile-section">
+    <img
+      [src]="imageUrl"
+      alt="Profile Image"
+    />
+    <p>{{ userNmae }}</p>
+    <p>{{ role }}</p>
+  </div>
+}
+
+
+      <h3 (click)="toggleMenu()"> {{ toMenu ? 'MENU' : '' }} <i class="fas fa-bars"></i></h3>
+      <ul>
+        <li><a routerLink="/Dashboard" routerLinkActive="active"><i class="fas fa-tachometer-alt"></i> {{ toMenu ? 'Dashboard' : '' }}</a></li>
+        <li><a routerLink="/Users" routerLinkActive="active"><i class="fas fa-users"></i> {{ toMenu ? 'Users' : '' }}</a></li>
+        <li><a routerLink="/Roles" routerLinkActive="active"><i class="fas fa-user-shield"></i> {{ toMenu ? 'Roles' : '' }}</a></li>
+        <li><a routerLink="/CMS" routerLinkActive="active"><i class="fas fa-edit"></i> {{ toMenu ? 'CMS' : '' }}</a></li>
+        <li><a routerLink="/EmailTemplates" routerLinkActive="active"><i class="fas fa-envelope-open-text"></i> {{ toMenu ? 'Email Templates' : '' }}</a></li>
+        <li><a routerLink="/Config" routerLinkActive="active"><i class="fas fa-cogs"></i> {{ toMenu ? 'Config' : '' }}</a></li>
+        <li><a routerLink="/AuditLogs" routerLinkActive="active"><i class="fas fa-clipboard-list"></i> {{ toMenu ? 'AuditLogs' : '' }}</a></li>
+        <li><a routerLink="/FAQ" routerLinkActive="active"><i class="fas fa-question-circle"></i> {{ toMenu ? 'FAQ' : '' }}</a></li>
+      </ul>
+    </aside>
+  }
+
+  <main class="content" [style.margin-left]="showLayout ? (toMenu ? '240px' : '25px') : '0'">
+    <router-outlet></router-outlet>
+  </main>
+</div>

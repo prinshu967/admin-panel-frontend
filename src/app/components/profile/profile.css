@@ -1,0 +1,405 @@
+/* ---------- Profile Container ---------- */
+.required{
+  color: red;
+}
+.container {
+  
+  width: 85%;
+  max-width: 1100px;
+  margin: 0rem auto;
+  background: linear-gradient(145deg, #ffffff, #f9fafb);
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.8rem 2rem;
+  justify-content: space-between;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', 'Inter', sans-serif;
+}
+
+.container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* ---------- Profile Header ---------- */
+.profile-image-section {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.profile-image {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #007bff;
+  box-shadow: 0 6px 18px rgba(0, 123, 255, 0.3);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.profile-image:hover {
+  transform: scale(1.06);
+  box-shadow: 0 8px 22px rgba(0, 123, 255, 0.35);
+}
+
+.user-name {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  color: #0f172a;
+}
+
+.user-role {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #6c757d;
+}
+
+/* ---------- Form Layout ---------- */
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.8rem 2rem;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.form-group {
+  flex: 1 1 45%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Full-width sections */
+.upload-section,
+.password-section,
+.button-group {
+  flex: 1 1 100%;
+}
+
+/* ---------- Labels ---------- */
+label {
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 0.6rem;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+
+
+/* ---------- Inputs ---------- */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="file"],
+input[type="number"],
+input[readonly] {
+  padding: 0.9rem 1.1rem;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+  background-color: #f8fafc;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+
+input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+  background-color: #fff;
+  
+}
+
+input[readonly]:focus {
+ 
+  border: none;
+  background-color: #fff;
+  cursor: not-allowed;
+}
+
+.invalid {
+  border-color: #e63946 !important;
+}
+
+/* ---------- Error Messages ---------- */
+.error {
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  color: #e6120b;
+  font-family: "Times New Roman", serif;
+}
+
+/* ---------- Upload Section ---------- */
+/* .upload-row {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  width: 50%;
+  margin-top: 0.6rem;
+  flex-wrap: wrap;
+} */
+
+.upload-preview img {
+  margin-top: 10px;
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 2px solid #007bff;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.25);
+}
+
+/* ---------- Password Section ---------- */
+.form-group-password-field{
+  margin-top: 10px;
+
+}
+.password-section h3 {
+  font-size: 1.3rem;
+  color: #007bff;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.password-field {
+  position: relative;
+}
+
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-with-icon input {
+  width: 100%;
+  padding-right: 40px;
+  /* margin-bottom: 10px; */
+  margin-top: 10px;
+}
+
+.toggle-icon {
+  position: absolute;
+  right: 15px;
+  top: 55%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #94a3b8;
+  font-size: 1.1rem;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.toggle-icon:hover {
+  color: #007bff;
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* ---------- Buttons ---------- */
+.button-group {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.cancel-btn,
+.submit-btn {
+  padding: 0.9rem 2.4rem;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.4px;
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: #fff;
+}
+
+.submit-btn:hover {
+  background: linear-gradient(135deg, #0056b3, #004494);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 123, 255, 0.35);
+}
+
+.cancel-btn {
+  background: linear-gradient(135deg, #6c757d, #495057);
+  color: #fff;
+}
+
+.cancel-btn:hover {
+  background: linear-gradient(135deg, #495057, #343a40);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(108, 117, 125, 0.3);
+}
+
+.submit-btn:disabled {
+  background: #a8c7ff;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ---------- Responsive Tweaks ---------- */
+@media (max-width: 768px) {
+  .form-group {
+    flex: 1 1 100%;
+  }
+
+  .button-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cancel-btn,
+  .submit-btn {
+    width: 100%;
+  }
+
+  .profile-image {
+    width: 100px;
+    height: 100px;
+  }
+
+  .user-name {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 1.5rem;
+  }
+
+  .user-name {
+    font-size: 1.4rem;
+  }
+
+  label {
+    font-size: 0.95rem;
+  }
+
+  input {
+    font-size: 0.9rem;
+  }
+}
+/* Ng Select style */
+
+/* ---------- ng-select Styling ---------- */
+
+/* Base ng-select container */
+::ng-deep .ng-select {
+  /* width: 100%; */
+  font-family: 'Poppins', 'Inter', sans-serif;
+  font-size: 1rem;
+  border-radius: 10px;
+  background-color: #f8fafc;
+  transition: all 0.3s ease;
+}
+
+
+
+/* Control (input) area */
+::ng-deep .ng-select .ng-select-container {
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  min-height: 48px;
+  padding: 0  0.4rem;
+  background-color: #f8fafc;
+  box-shadow: none;
+  transition: all 0.3s ease;
+}
+::ng-deep .ng-select .ng-input > input {
+  margin-top: 8px;
+
+  box-sizing: border-box;
+  line-height: 1;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: inherit;
+  color: inherit;
+}
+
+/* Hover and focus effects */
+::ng-deep .ng-select:hover .ng-select-container {
+  border-color: #007bff;
+}
+
+::ng-deep .ng-select.ng-select-focused .ng-select-container {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+  background-color: #fff;
+}
+
+/* Placeholder */
+::ng-deep .ng-select .ng-select-placeholder {
+  color: #94a3b8;
+}
+
+/* Selected item (inside the input) */
+::ng-deep .ng-select .ng-value {
+  color: #0f172a;
+  font-weight: 500;
+}
+
+/* Dropdown panel */
+::ng-deep .ng-dropdown-panel {
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  margin-top: 4px;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+/* Dropdown options */
+::ng-deep .ng-option {
+  padding: 0.7rem 1rem;
+  transition: background 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+::ng-deep .ng-option:hover {
+  background-color: #e8f1ff;
+}
+
+/* Selected option */
+::ng-deep .ng-option-selected {
+  background-color: #007bff !important;
+  color: #fff !important;
+}
+
+/* Flag images inside ng-select */
+::ng-deep .ng-option img,
+::ng-deep .ng-value img {
+  border-radius: 2px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+/* Invalid state (for validation) */
+::ng-deep .ng-select.ng-invalid.ng-touched .ng-select-container {
+  border-color: #e63946 !important;
+  box-shadow: 0 0 4px rgba(230, 57, 70, 0.3);
+}

@@ -1,0 +1,58 @@
+<div *ngIf="isloading" class="spinner-overlay">
+    <div class="spinner"></div>
+  </div>
+
+
+
+<form [formGroup]="configForm" (ngSubmit)="onSubmit()" class="config-form">
+  <h2>
+    Add New Config
+  </h2>
+
+  <!-- Key -->
+  <div class="form-group">
+    <label for="key">Key <span class="required">*</span></label>
+    <input id="key" type="text" class="form-control" formControlName="key" placeholder="Enter config key"     (input)="limitInput('key',50)" />
+    <div class="error" *ngIf="key?.touched && key?.invalid">
+      <small *ngIf="key?.errors?.['required']">Key is required.</small>
+      <small *ngIf="key?.errors?.['pattern']">Key cannot start or end with spaces.</small>
+      <small *ngIf="key?.errors?.['maxlength']">Key cannot exceed 50 characters.</small>
+    </div>
+  </div>
+
+  <!-- Value -->
+  <div class="form-group">
+    <label for="value">Value <span class="required">*</span></label>
+    <input id="value" type="text" class="form-control" formControlName="value" placeholder="Enter config value" (input)="limitInput('value',50)" />
+    <div class="error" *ngIf="value?.touched && value?.invalid">
+      <small *ngIf="value?.errors?.['required']">Value is required.</small>
+      <small *ngIf="value?.errors?.['pattern']">Value cannot start or end with spaces.</small>
+      <small *ngIf="value?.errors?.['maxlength']">Value cannot exceed 50 characters.</small>
+    </div>
+  </div>
+
+  <!-- Display Order -->
+  <div class="form-group">
+    <label for="displayOrder">Display Order<span class="required">*</span></label>
+    <input id="displayOrder" type="number" class="form-control" formControlName="displayOrder" placeholder="Enter display order" (input)="limitNumberLength($event,50)" />
+    <div class="error" *ngIf="displayOrder?.touched && displayOrder?.invalid">
+      Display order is required
+    </div>
+  </div>
+
+  <!-- Active Status -->
+  <div class="form-group">
+    <label for="isActive">Status</label>
+    <select id="isActive" class="form-control" formControlName="isActive">
+      <option [ngValue]="true">Active</option>
+      <option [ngValue]="false">Inactive</option>
+    </select>
+  </div>
+
+  <!-- Buttons -->
+  <div class="button-group">
+    <button type="submit" class="btn-submit" >Submit</button>
+    <button type="button" class="btn-cancel" (click)="cancel()">Cancel</button>
+  </div>
+
+</form>

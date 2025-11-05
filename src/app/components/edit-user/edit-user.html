@@ -1,0 +1,169 @@
+
+
+
+
+<div *ngIf="isloading" class="spinner-overlay">
+  <div class="spinner"></div>
+</div>
+
+<form [formGroup]="userForm" (ngSubmit)="updateUser()" class="user-form">
+  <h2>Edit User</h2>
+
+  <!-- First Name -->
+  <div class="form-group">
+    <label>First Name <span class="required">*</span></label>
+    <input type="text" formControlName="FirstName" class="form-control" placeholder="Enter first name" (input)="limitInput('FirstName', 50)" />
+    <div class="error" *ngIf="userForm.get('FirstName')?.touched && userForm.get('FirstName')?.invalid">
+      <small *ngIf="userForm.get('FirstName')?.hasError('required')">First name is required.</small>
+      <small *ngIf="userForm.get('FirstName')?.hasError('minlength')">Minimum 2 characters.</small>
+      <small *ngIf="userForm.get('FirstName')?.hasError('maxlength')">Maximum 50 characters.</small>
+      <small *ngIf="userForm.get('FirstName')?.hasError('pattern')">Cannot start with space or contain numbers.</small>
+    </div>
+  </div>
+
+  <!-- Last Name -->
+  <div class="form-group">
+    <label>Last Name <span class="required">*</span></label>
+    <input type="text" formControlName="LastName" class="form-control" placeholder="Enter last name" (input)="limitInput('LastName', 50)" />
+    <div class="error" *ngIf="userForm.get('LastName')?.touched && userForm.get('LastName')?.invalid">
+      <small *ngIf="userForm.get('LastName')?.hasError('required')">Last name is required.</small>
+      <small *ngIf="userForm.get('LastName')?.hasError('minlength')">Minimum 2 characters.</small>
+      <small *ngIf="userForm.get('LastName')?.hasError('maxlength')">Maximum 50 characters.</small>
+      <small *ngIf="userForm.get('LastName')?.hasError('pattern')">Cannot start with space or contain numbers.</small>
+    </div>
+  </div>
+
+  
+  <!-- Country Code -->
+  <div class="form-group">
+    <label>Country Code <span class="required">*</span></label>
+    <ng-select
+      [items]="countries"
+      bindLabel="label"
+      bindValue="code"
+      formControlName="CountryCode"
+      placeholder="Select country"
+      class="form-control"
+    >
+      <ng-template ng-option-tmp let-item="item">
+        <img
+          [src]="item.flag"
+          width="20"
+          height="13"
+          style="margin-right: 8px; border-radius: 2px;"
+          alt="{{ item.label }} flag"
+        />
+        <span>{{ item.label }} ({{ item.code }})</span>
+      </ng-template>
+
+      <ng-template ng-label-tmp let-item="item">
+        <img
+          [src]="item.flag"
+          width="20"
+          height="15"
+          style="margin-right: 6px; border-radius: 2px;"
+          alt="{{ item.label }} flag"
+        />
+        <span>{{ item.code }}</span>
+      </ng-template>
+    </ng-select>
+    <div class="error" *ngIf="userForm.get('CountryCode')?.touched && userForm.get('CountryCode')?.invalid">
+      <small *ngIf="userForm.get('CountryCode')?.hasError('required')">Country Code is required.</small>
+    </div>
+  </div>
+
+  <!-- Phone Number -->
+  <div class="form-group">
+    <label>Phone Number <span class="required">*</span></label>
+    <input
+      type="number"
+      formControlName="PhoneNumber"
+      class="form-control"
+      placeholder="Enter phone number"
+      (input)="limitNumberLength($event,10)"
+    />
+    <div class="error" *ngIf="userForm.get('PhoneNumber')?.touched && userForm.get('PhoneNumber')?.invalid">
+      <small *ngIf="userForm.get('PhoneNumber')?.hasError('required')">Phone number is required.</small>
+      <small *ngIf="userForm.get('PhoneNumber')?.hasError('pattern')">PhoneNumber must be 6 to 10 characters Long.</small>
+    </div>
+  </div>
+
+  <!-- Email -->
+  <div class="form-group">
+    <label>Email <span class="required">*</span></label>
+    <input type="email" formControlName="Email" class="form-control" placeholder="Enter email" (input)="limitInput('Email', 100)" />
+    <div class="error" *ngIf="userForm.get('Email')?.touched && userForm.get('Email')?.invalid">
+      <small *ngIf="userForm.get('Email')?.hasError('required')">Email is required.</small>
+      <small *ngIf="userForm.get('Email')?.hasError('email') || userForm.get('Email')?.hasError('pattern')">Invalid email format.</small>
+    </div>
+  </div>
+
+
+  <!-- Password -->
+  <div class="form-group password-group">
+  <label>New Password <span class="required">*</span></label>
+  <div class="password-wrapper">
+    <input
+      [type]="showPassword ? 'text' : 'password'"
+      formControlName="NewPassword"
+      class="form-control password-input"
+      placeholder="Enter password"
+      (input)="limitInput('NewPassword', 20)"
+    />
+    <button type="button" class="password-toggle" (click)="showPassword = !showPassword">
+      <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+    </button>
+  </div>
+
+
+    <div class="error" *ngIf="userForm.get('NewPassword')?.touched && userForm.get('NewPassword')?.invalid">
+      <small *ngIf="userForm.get('NewPassword')?.hasError('required')">Password is required.</small>
+      <small *ngIf="userForm.get('NewPassword')?.hasError('minlength')">Minimum 8 characters.</small>
+      <small *ngIf="userForm.get('NewPassword')?.hasError('maxlength')">Maximum 20 characters.</small>
+      <small *ngIf="userForm.get('NewPassword')?.hasError('pattern')">Enter a valid password.</small>
+    </div>
+  </div>
+
+  <!-- Role Name -->
+  <div class="form-group">
+    <label>Role Name <span class="required">*</span></label>
+    <ng-select
+      formControlName="RoleName"
+      [items]="Roles"
+      [multiple]="false"
+      [closeOnSelect]="true"
+      placeholder="Select role"
+      class="form-control"
+    ></ng-select>
+    <div class="error" *ngIf="userForm.get('RoleName')?.touched && userForm.get('RoleName')?.invalid">
+      <small *ngIf="userForm.get('RoleName')?.hasError('required')">Role name is required.</small>
+      <small *ngIf="userForm.get('RoleName')?.hasError('pattern')">Cannot be empty or only spaces.</small>
+    </div>
+  </div>
+
+  <!-- Active Status -->
+  <div class="form-group">
+    <label>Status</label>
+    <select formControlName="IsActive" class="form-control">
+      <option [value]="true">Active</option>
+      <option [value]="false">Inactive</option>
+    </select>
+  </div>
+
+  <!-- Profile Image -->
+  <div class="form-group">
+    <label>Upload Profile Image</label>
+    <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+    <div *ngIf="imagePreview" class="image-preview">
+      <img [src]="imagePreview" alt="Profile Preview" width="100" height="100" />
+    </div>
+  </div>
+
+  
+  <!-- Buttons -->
+  <div class="button-group">
+    <button type="submit" class="btn-submit" >Update User</button>
+    <button type="button" class="btn-cancel" (click)="cancel()">Cancel</button>
+  </div>
+</form>
+
